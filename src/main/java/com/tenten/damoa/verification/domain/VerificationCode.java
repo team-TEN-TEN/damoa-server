@@ -1,4 +1,4 @@
-package com.tenten.damoa.verificationcode.domain;
+package com.tenten.damoa.verification.domain;
 
 import com.tenten.damoa.member.domain.Member;
 import jakarta.persistence.Column;
