@@ -53,7 +53,7 @@ VALUES
 (40, UUID(), 'INSTAGRAM', '오늘의 독서 시간', '오늘은 하루 종일 책을 읽었어요. 마음이 평온해집니다.', 12, 8, 3, '2024-08-31 15:00:00', '2024-08-31 15:00:00');
 
 
-INSERT INTO hashtag (tag, created_at, post_id)
+INSERT IGNORE INTO hashtag (tag, created_at, post_id)
 VALUES
 -- TWITTER 해시태그
 ('tenten', '2024-08-03 08:30:00', 1),
