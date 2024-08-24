@@ -1,10 +1,11 @@
 spring:
   config:
     import: application-secret.properties
-  profiles:
-    include:
   datasource:
-    url:
-    username:
-    password:
-    driver-class-name:
+    url: ${RDS_URL}
+    username: ${RDS_USERNAME}
+    password: ${RDS_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
