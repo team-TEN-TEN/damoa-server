@@ -1,4 +1,4 @@
-package com.tenten.damoa.interactionhistory.domain;
+package com.tenten.damoa.interaction.domain;
 
 import com.tenten.damoa.post.domain.Post;
 import jakarta.persistence.Column;

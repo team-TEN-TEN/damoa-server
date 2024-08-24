@@ -1,4 +1,4 @@
-package com.tenten.damoa.interactionhistory.domain;
+package com.tenten.damoa.interaction.domain;
 
 public enum InteractionCategory {
     VIEW,
