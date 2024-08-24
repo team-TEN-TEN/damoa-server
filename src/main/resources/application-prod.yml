@@ -1,0 +1,10 @@
+spring:
+  config:
+    import: application-secret.properties
+  profiles:
+    include:
+  datasource:
+    url:
+    username:
+    password:
+    driver-class-name:
