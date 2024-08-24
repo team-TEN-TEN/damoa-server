@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS member
 (
-    id        BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id        VARCHAR(255) DEFAULT (UUID()) PRIMARY KEY,
     account   VARCHAR(50) UNIQUE NOT NULL,
     email     VARCHAR(100)       NOT NULL,
     password  VARCHAR(255)       NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS verification_code
     id        BIGINT AUTO_INCREMENT PRIMARY KEY,
     code      VARCHAR(6)   NOT NULL,
     send_at   TIMESTAMP(6) NOT NULL,
-    member_id BIGINT       NOT NULL,
+    member_id VARCHAR(255) NOT NULL,
     CONSTRAINT fk_member_verification_code FOREIGN KEY (member_id) REFERENCES member (id)
 );
 
