@@ -1,6 +1,6 @@
 package com.tenten.damoa.interactionhistory.domain;
 
-public enum Category {
+public enum InteractionCategory {
     VIEW,
     LIKE,
     SHARE

@@ -22,9 +22,9 @@ public class InteractionHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "category", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private Category category;
+    private InteractionCategory category;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
