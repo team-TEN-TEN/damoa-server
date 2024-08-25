@@ -61,7 +61,6 @@ public class PostService {
 
     private void handleLikeSuccess(Post post) {
         post.incrementLikeCount();
-        postRepository.save(post);
         InteractionHistory interactionHistory = InteractionHistory.builder()
             .category(InteractionCategory.LIKE)
             .createdAt(LocalDateTime.now())
