@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Auth {
 
-    MemberRole role() default MemberRole.PRE_MEMBER;
+    MemberRole role() default MemberRole.MEMBER;
 }
