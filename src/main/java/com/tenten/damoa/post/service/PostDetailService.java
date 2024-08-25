@@ -28,10 +28,9 @@ public class PostDetailService {
         Post post = postRepository.findById(id)
                 .orElseThrow(()-> new BusinessException(ErrorCode.BAD_REQUEST));
 
-
+        post.increaseViewCount();g
         post.setUpdatedAt(LocalDateTime.now());
         postRepository.save(post);
         return post;
-
     }
 }
