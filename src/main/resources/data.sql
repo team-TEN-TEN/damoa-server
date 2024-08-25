@@ -189,5 +189,3 @@ SELECT 'SHARE',
 FROM post p
          JOIN seq ON seq.n <= p.share_count
 ORDER BY p.id, seq.n;
-
-

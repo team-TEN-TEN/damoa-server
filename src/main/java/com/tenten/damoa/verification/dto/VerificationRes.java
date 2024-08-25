@@ -1,4 +1,4 @@
-package com.tenten.damoa.verificationcode.dto;
+package com.tenten.damoa.verification.dto;
 
 import lombok.Data;
 

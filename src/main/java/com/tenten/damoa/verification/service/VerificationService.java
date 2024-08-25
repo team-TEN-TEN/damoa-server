@@ -1,15 +1,14 @@
-package com.tenten.damoa.verificationcode.service;
+package com.tenten.damoa.verification.service;
 
 import com.tenten.damoa.common.exception.BusinessException;
 import com.tenten.damoa.common.exception.ErrorCode;
 import com.tenten.damoa.member.domain.Member;
 import com.tenten.damoa.member.domain.MemberRole;
 import com.tenten.damoa.member.repository.MemberRepository;
-import com.tenten.damoa.verificationcode.domain.VerificationCode;
-import com.tenten.damoa.verificationcode.dto.VerificationReq;
-import com.tenten.damoa.verificationcode.dto.VerificationRes;
-import com.tenten.damoa.verificationcode.repository.VerificationCodeRepository;
-import java.util.Optional;
+import com.tenten.damoa.verification.domain.VerificationCode;
+import com.tenten.damoa.verification.dto.VerificationReq;
+import com.tenten.damoa.verification.dto.VerificationRes;
+import com.tenten.damoa.verification.repository.VerificationCodeRepository;
 import org.springframework.stereotype.Service;
 
 @Service
