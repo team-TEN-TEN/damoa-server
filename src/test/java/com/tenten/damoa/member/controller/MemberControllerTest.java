@@ -73,7 +73,7 @@ class MemberControllerTest {
 
     @DisplayName("사용자가 이미 사용중인 계정으로 회원가입을 하면 409를 반환한다.")
     @Test
-    void memberAccountConflictRegisterReturn404() throws Exception {
+    void memberAccountConflictRegisterReturn409() throws Exception {
         // given
         RegisterMemberReq request = getRegisterMemberReq();
 
