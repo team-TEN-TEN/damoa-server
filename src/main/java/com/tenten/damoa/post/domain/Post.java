@@ -42,4 +42,8 @@ public class Post extends BaseEntity {
     @Column(nullable = false)
     private int shareCount;
 
+    public void increaseViewCount() {
+        this.viewCount++;
+    }
+
 }
