@@ -18,6 +18,12 @@ public enum ErrorCode {
     MISSING_PARAMETER_EXCEPTION(HttpStatus.BAD_REQUEST, "필수 요청 값이 누락되었거나 잘못되었습니다."),
 
     /**
+     * 404 - Not Found
+     */
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),
+    CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "발급된 인증 코드가 존재하지 않습니다."),
+
+    /**
      * 500 - Internal Server Error
      */
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 에러가 발생했습니다.")

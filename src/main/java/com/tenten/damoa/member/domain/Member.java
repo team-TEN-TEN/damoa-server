@@ -33,4 +33,8 @@ public class Member {
 
     @Column(nullable = false)
     private LocalDateTime joinedAt;
+
+    public void updateRole(MemberRole newRole) {
+        this.role = newRole;
+    }
 }
