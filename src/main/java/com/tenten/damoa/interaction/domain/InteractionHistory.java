@@ -1,8 +1,10 @@
-package com.tenten.damoa.verificationcode.domain;
+package com.tenten.damoa.interaction.domain;
 
-import com.tenten.damoa.member.domain.Member;
+import com.tenten.damoa.post.domain.Post;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,19 +16,20 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class VerificationCode {
+public class InteractionHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String code;
+    @Column(name = "category", nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private InteractionCategory category;
 
     @Column(nullable = false)
-    private LocalDateTime sendAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "post_id")
+    private Post post;
 }
