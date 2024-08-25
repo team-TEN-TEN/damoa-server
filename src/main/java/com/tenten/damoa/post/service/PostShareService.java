@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatusCode;
 
 
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 @Service
 public class PostShareService {
@@ -36,8 +37,9 @@ public class PostShareService {
 
         String contentId = post.getContentId();
         SnsType type = post.getType();
+        String lowercaseType = type.name().toLowerCase();
 
-        String externalApiUrl = String.format("https://www.%s.com/share/%s", type, contentId);
+        String externalApiUrl = String.format("https://www.%s.com/share/%s", lowercaseType, contentId);
         //String externalApiUrl = String.format("https://www.youtube.com/");
 
         //RestClient로 외부 API 호출
