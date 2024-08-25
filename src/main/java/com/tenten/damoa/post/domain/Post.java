@@ -39,4 +39,8 @@ public class Post extends BaseEntity {
 
     @Column(nullable = false)
     private int shareCount;
+
+    public void incrementLikeCount() {
+        this.likeCount++;
+    }
 }
