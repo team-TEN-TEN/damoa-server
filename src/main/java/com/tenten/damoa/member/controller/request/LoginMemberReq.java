@@ -2,10 +2,12 @@ package com.tenten.damoa.member.controller.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 
 @Schema(description = "사용자 로그인 요청 객체")
 @Getter
+@Builder
 public class LoginMemberReq {
 
     @Schema(description = "계정", example = "tenten")
