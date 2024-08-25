@@ -1,5 +1,7 @@
 package com.tenten.damoa.post.controller;
 
+import com.tenten.damoa.common.exception.BusinessException;
+import com.tenten.damoa.common.exception.ErrorCode;
 import com.tenten.damoa.post.service.PostShareService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +20,11 @@ public class PostController {
     public ResponseEntity<String> sharePost(@PathVariable("id") Long id ) {
         try {
             postShareService.sharePost(id);
-            return ResponseEntity.ok("Post shared successfully.");//게시물 공유가 잘 되었다면 200과 함께 message 반환
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to share post: " + e.getMessage());
+            return ResponseEntity.ok().build();//게시물 공유가 잘 되었다면 200.
+        } catch (BusinessException e) {
+            throw e;
+        }catch (Exception e) {
+            throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR,e);
         }
     }
 }
