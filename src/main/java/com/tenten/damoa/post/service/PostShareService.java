@@ -37,6 +37,20 @@ public class PostShareService {
         String contentId = post.getContentId();
         SnsType type = post.getType();
 
+        String externalApiUrl = String.format("https://www.%s.com/share/%s", type, contentId);
+        //String externalApiUrl = String.format("https://www.youtube.com/");
+
+        //RestClient로 외부 API 호출
+        RestClient restClient = RestClient.create();
+
+        String result = restClient.get()
+                .uri(externalApiUrl)
+                .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
+                    throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR);
+                })
+                .body(String.class);
+
 
 
         // shareCount 1 증가
