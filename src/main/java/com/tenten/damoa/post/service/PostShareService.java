@@ -40,11 +40,12 @@ public class PostShareService {
         String lowercaseType = type.name().toLowerCase();
 
         String externalApiUrl = String.format("https://www.%s.com/share/%s", lowercaseType, contentId);
-        //String externalApiUrl = String.format("https://www.youtube.com/");
+        //String externalApiUrl = String.format("https://www.youtube.com/");//작동 잘 하는지 예시로 유튜브에 호출해봄.
 
-        //RestClient로 외부 API 호출
+        //RestClient로 외부 API 호출하기 위한 RestClient 생성
         RestClient restClient = RestClient.create();
 
+        //RestClient로 외부 API 호출(GET 요청)
         String result = restClient.get()
                 .uri(externalApiUrl)
                 .retrieve()
@@ -55,13 +56,15 @@ public class PostShareService {
 
 
 
+        // 외부 api 호출이 정상적으로 되었다면
+
         // shareCount 1 증가
         post.increaseShareCount();
 
-        // 변경된 Post를 저장
+        // 변경된 Post를 레포지토리에 저장
         postRepository.save(post);
 
-        // InteractionHistory 로그 기록 (SHARE)
+        // InteractionHistory에 로그 기록 (SHARE)도 남겨주기
         InteractionHistory interactionHistory = new InteractionHistory();
         interactionHistory.setCategory(InteractionCategory.SHARE);
         interactionHistory.setCreatedAt(LocalDateTime.now());

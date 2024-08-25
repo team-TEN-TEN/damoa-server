@@ -18,7 +18,7 @@ public class PostController {
     public ResponseEntity<String> sharePost(@PathVariable("id") Long id ) {
         try {
             postShareService.sharePost(id);
-            return ResponseEntity.ok("Post shared successfully.");
+            return ResponseEntity.ok("Post shared successfully.");//게시물 공유가 잘 되었다면 200과 함께 message 반환
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to share post: " + e.getMessage());
         }
