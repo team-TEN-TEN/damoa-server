@@ -9,10 +9,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
+import lombok.Builder;
 import lombok.Getter;
 
 @Schema(description = "사용자 회원가입 요청 객체")
 @Getter
+@Builder
 public class RegisterMemberReq {
 
     @Schema(description = "계정", example = "tenten")
