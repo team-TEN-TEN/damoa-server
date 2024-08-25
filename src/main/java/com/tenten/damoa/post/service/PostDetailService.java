@@ -28,9 +28,15 @@ public class PostDetailService {
         Post post = postRepository.findById(id)
                 .orElseThrow(()-> new BusinessException(ErrorCode.BAD_REQUEST));
 
-        post.increaseViewCount();g
+        post.increaseViewCount();
         post.setUpdatedAt(LocalDateTime.now());
         postRepository.save(post);
+
+        InteractionHistory interactionHistory = new InteractionHistory();
+        interactionHistory.setCategory(InteractionCategory.VIEW);
+        interactionHistory.setCreatedAt(LocalDateTime.now());
+        interactionHistory.setPost(post);
+        interactionHistoryRepository.save(interactionHistory);
         return post;
     }
 }
