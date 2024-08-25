@@ -56,8 +56,16 @@ public class PostShareService {
         // shareCount 1 증가
         post.increaseShareCount();
 
-        // 변경된 Post를 저장 (트랜잭션에 의해 자동으로 저장됨)
+        // 변경된 Post를 저장
         postRepository.save(post);
+
+        // InteractionHistory 로그 기록 (SHARE)
+        InteractionHistory interactionHistory = new InteractionHistory();
+        interactionHistory.setCategory(InteractionCategory.SHARE);
+        interactionHistory.setCreatedAt(LocalDateTime.now());
+        interactionHistory.setPost(post);
+
+        interactionHistoryRepository.save(interactionHistory);
 
         // 변경된 Post 반환
         return post;
