@@ -8,10 +8,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id
@@ -33,4 +37,15 @@ public class Member {
 
     @Column(nullable = false)
     private LocalDateTime joinedAt;
+
+    @Builder
+    public Member(
+        String account, String email, String password, MemberRole role, LocalDateTime joinedAt
+    ) {
+        this.account = account;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.joinedAt = joinedAt;
+    }
 }
