@@ -1,16 +1,12 @@
 package com.tenten.damoa.post.domain;
 
 import com.tenten.damoa.common.model.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Builder;
+import com.tenten.damoa.hashtag.domain.Hashtag;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -42,8 +38,14 @@ public class Post extends BaseEntity {
     @Column(nullable = false)
     private int shareCount;
 
+    @OneToMany(mappedBy = "post")
+    private List<Hashtag> hashtags = new ArrayList<>();
+
+    public void increaseViewCount() {
+        this.viewCount++;
+    }
+
     public void increaseShareCount() {
         this.shareCount++;
     }
-
 }

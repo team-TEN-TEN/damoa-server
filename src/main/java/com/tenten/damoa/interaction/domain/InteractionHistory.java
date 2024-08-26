@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Getter
@@ -39,7 +38,7 @@ public class InteractionHistory {
     private Post post;
 
     @Builder
-    public InteractionHistory(InteractionCategory category, LocalDateTime createdAt, Post post) {
+    private InteractionHistory(InteractionCategory category, LocalDateTime createdAt, Post post) {
         this.category = category;
         this.createdAt = createdAt;
         this.post = post;
