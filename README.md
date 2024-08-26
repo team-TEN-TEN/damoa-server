@@ -35,6 +35,8 @@
 
 ## API Reference
 
+[API 명세서 (Swagger)](http://43.202.246.107:8080/swagger-ui/index.html)
+
 <details>
 <summary>사용자 회원가입 API</summary>
 
