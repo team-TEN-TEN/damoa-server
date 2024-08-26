@@ -22,9 +22,16 @@ public class PostQueryRes {
         this.contentId = post.getContentId();
         this.type = post.getType();
         this.title = post.getTitle();
-        this.content = post.getContent();
         this.viewCount = post.getViewCount();
         this.likeCount = post.getLikeCount();
         this.shareCount = post.getShareCount();
+
+        // content 20자 제한
+        String content = post.getContent();
+        if (content.length() > 20) {
+            this.content = content.substring(0, 20);
+        } else {
+            this.content = content;
+        }
     }
 }
