@@ -36,7 +36,15 @@ public class InteractionHistory {
     private Post post;
 
     @Builder
-    public InteractionHistory(InteractionCategory category, LocalDateTime createdAt, Post post) {
+    private InteractionHistory(Long id, InteractionCategory category, LocalDateTime createdAt, Post post) {
+        this.id = id;
+        this.category = category;
+        this.createdAt = createdAt;
+        this.post = post;
+    }
+
+    @Builder
+    private InteractionHistory(InteractionCategory category, LocalDateTime createdAt, Post post) {
         this.category = category;
         this.createdAt = createdAt;
         this.post = post;
