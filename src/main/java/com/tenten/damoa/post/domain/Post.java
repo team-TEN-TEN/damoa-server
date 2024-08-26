@@ -3,9 +3,7 @@ package com.tenten.damoa.post.domain;
 import com.tenten.damoa.common.model.BaseEntity;
 import com.tenten.damoa.hashtag.domain.Hashtag;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,5 +47,9 @@ public class Post extends BaseEntity {
 
     public void increaseViewCount() {
         this.viewCount++;
+    }
+
+    public void increaseShareCount() {
+        this.shareCount++;
     }
 }
