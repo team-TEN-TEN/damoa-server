@@ -3,6 +3,7 @@ package com.tenten.damoa.post.domain;
 import com.tenten.damoa.common.model.BaseEntity;
 import com.tenten.damoa.hashtag.domain.Hashtag;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -38,6 +39,6 @@ public class Post extends BaseEntity {
     @Column(nullable = false)
     private int shareCount;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post")
     private List<Hashtag> hashtags = new ArrayList<>();
 }
