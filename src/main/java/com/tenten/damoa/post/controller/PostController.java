@@ -17,7 +17,7 @@ public class PostController {
         this.postDetailService = postDetailService;
     }
 
-    @GetMapping("/{id}/detail")
+    @GetMapping("/posts/{id}/detail")
     public ResponseEntity<Post> getPostDetail(@PathVariable("id") Long id) {
         Post postDetail = postDetailService.getPostDetail(id);
         return ResponseEntity.ok(postDetail);
