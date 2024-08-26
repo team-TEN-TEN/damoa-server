@@ -1,7 +1,6 @@
 package com.tenten.damoa.verification.controller;
 
 import com.tenten.damoa.verification.dto.VerificationReq;
-import com.tenten.damoa.verification.dto.VerificationRes;
 import com.tenten.damoa.verification.service.VerificationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,12 +20,8 @@ public class VerificationController {
 
     @PostMapping("/members/verify")
     public ResponseEntity<String> verifyMember(@RequestBody VerificationReq req) {
-        VerificationRes res = verificationService.memberVerification(req);
-        if (res.isSuccess()) {
-            return ResponseEntity.ok(res.getMessage());
-        } else {
-            return ResponseEntity.badRequest().body(res.getMessage());
-        }
+         verificationService.memberVerification(req);
+         return ResponseEntity.ok("가입가입되었습니다");
     }
 
 }

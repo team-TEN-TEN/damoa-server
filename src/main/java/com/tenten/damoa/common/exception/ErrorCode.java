@@ -24,6 +24,11 @@ public enum ErrorCode {
     CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "발급된 인증 코드가 존재하지 않습니다."),
 
     /**
+     * 401 Unauthorized
+     */
+    UNAUTHORIZED_ACCESS(HttpStatus.UNAUTHORIZED, "인증번호가 일치하지 않습니다"),
+
+    /**
      * 500 - Internal Server Error
      */
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 에러가 발생했습니다.")

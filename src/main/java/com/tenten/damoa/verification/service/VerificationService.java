@@ -7,7 +7,6 @@ import com.tenten.damoa.member.domain.MemberRole;
 import com.tenten.damoa.member.repository.MemberRepository;
 import com.tenten.damoa.verification.domain.VerificationCode;
 import com.tenten.damoa.verification.dto.VerificationReq;
-import com.tenten.damoa.verification.dto.VerificationRes;
 import com.tenten.damoa.verification.repository.VerificationCodeRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ public class VerificationService {
         this.memberRepository = memberRepository;
     }
 
-    public VerificationRes memberVerification(VerificationReq req) {
+    public void memberVerification(VerificationReq req) {
         String memberAccount = req.getAccount();
         Member member = memberRepository.findByAccount(memberAccount)
             .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
@@ -33,9 +32,8 @@ public class VerificationService {
 
         if (verificationCode.getCode().equals(req.getCode())) {
             handleSuccess(member);
-            return new VerificationRes(true, "가입되었습니다");
         } else {
-            return new VerificationRes(false, "인증 코드가 일치하지 않습니다");
+            throw new BusinessException(ErrorCode.UNAUTHORIZED_ACCESS);
         }
     }
 
