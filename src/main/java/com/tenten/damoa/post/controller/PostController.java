@@ -21,6 +21,6 @@ public class PostController {
     @PatchMapping("/{postId}/share")
     public ResponseEntity<String> sharePost(@PathVariable("postId") Long id ) {
         postShareService.sharePost(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("게시물이 공유되었습니다.");
     }
 }
