@@ -44,6 +44,7 @@ public class Member {
 
     public void updateRole(MemberRole newRole) {
         this.role = newRole;
+    }
 
     @Builder
     public Member(
