@@ -20,6 +20,10 @@ public enum ErrorCode {
     INVALID_FORMAT_EXCEPTION(HttpStatus.BAD_REQUEST, "요청된 데이터의 형식이 잘못되었습니다. 유효한 JSON 형식을 사용해 주세요."),
     MISSING_PARAMETER_EXCEPTION(HttpStatus.BAD_REQUEST, "필수 요청 값이 누락되었거나 잘못되었습니다."),
 
+
+    TYPE_NOT_FOUND(HttpStatus.NOT_FOUND, "지원하지 않는 타입입니다."),
+    POST_NOT_FOUND(HttpStatus.NOT_FOUND, "게시글이 존재하지 않습니다."),
+
     INVALID_TIME_UNIT_EXCEPTION(HttpStatus.BAD_REQUEST, "입력된 시간 단위가 유효하지 않습니다."),
     INVALID_METRICS_TYPE_EXCEPTION(HttpStatus.BAD_REQUEST, "입력된 지표 종류가 유효하지 않습니다."),
 
@@ -51,7 +55,6 @@ public enum ErrorCode {
      * 409 - Conflict
      */
     ACCOUNT_CONFLICT(HttpStatus.CONFLICT, "이미 사용중인 계정입니다."),
-
 
     /**
      * 500 - Internal Server Error
