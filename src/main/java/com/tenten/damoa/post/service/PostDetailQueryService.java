@@ -31,12 +31,12 @@ public class PostDetailQueryService {
         post.increaseViewCount();
         postRepository.save(post);
 
-
-        InteractionHistory interactionHistory = new InteractionHistory(
-                InteractionCategory.VIEW,
-                LocalDateTime.now(),
-                post
-        );
+        //builder 패턴을 이용하여 객체(생성자) 생성
+        InteractionHistory interactionHistory = InteractionHistory.builder()
+                .category(InteractionCategory.VIEW)
+                .createdAt(LocalDateTime.now())
+                .post(post)
+                .build();
 
 
         interactionHistoryRepository.save(interactionHistory);
