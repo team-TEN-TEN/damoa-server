@@ -2,9 +2,12 @@ package com.tenten.damoa.stat.repository;
 
 import static com.tenten.damoa.interaction.domain.QInteractionHistory.interactionHistory;
 import static com.tenten.damoa.hashtag.domain.QHashtag.hashtag;
+import static com.tenten.damoa.post.domain.QPost.post;
 
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.DateTemplate;
+import com.querydsl.core.types.dsl.DateTimePath;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.tenten.damoa.common.exception.BusinessException;
@@ -28,8 +31,8 @@ public class StatRepositoryImpl implements StatRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<HashtagStatRes> getMetricsCount(HashtagStatCommand command) {
-        DateTemplate<String> date = getDateTemplateByTimeUnit(command.unit());
+    public List<HashtagStatRes> getMetricsCountForPeriod(HashtagStatCommand command) {
+        DateTemplate<String> date = getDateTemplateByTimeUnit(command.unit(), interactionHistory.createdAt);
 
         return queryFactory
                 .select(date, interactionHistory.count())
@@ -53,19 +56,44 @@ public class StatRepositoryImpl implements StatRepository {
                 .toList();
     }
 
-    private DateTemplate<String> getDateTemplateByTimeUnit(TimeUnit unit) {
+    @Override
+    public List<HashtagStatRes> getPostCountForPeriod(HashtagStatCommand command) {
+        DateTemplate<String> date = getDateTemplateByTimeUnit(command.unit(), post.createdAt);
+
+        return queryFactory
+                .select(date, post.id.countDistinct())
+                .from(post)
+                .join(hashtag).on(post.id.eq(hashtag.post.id))
+                .where(
+                        hashtagEq(command.hashtag()),
+                        post.createdAt.goe(command.period().getStart()),
+                        post.createdAt.loe(command.period().getEnd())
+                )
+                .groupBy(date)
+                .orderBy(date.asc())
+                .fetch()
+                .stream()
+                .filter(Objects::nonNull)
+                .map(tuple -> HashtagStatRes.builder()
+                        .date(LocalDateTime.parse(tuple.get(date), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                        .value(Objects.requireNonNull(tuple.get(post.id.countDistinct())).intValue())
+                        .build())
+                .toList();
+    }
+
+    private DateTemplate<String> getDateTemplateByTimeUnit(TimeUnit unit, DateTimePath<LocalDateTime> path) {
         switch (unit) {
             case DATE -> {
                 return Expressions.dateTemplate(
                         String.class,
                         "DATE_FORMAT({0}, '%Y-%m-%d %00:00:00')",
-                        interactionHistory.createdAt);
+                        path);
             }
             case HOUR -> {
                 return Expressions.dateTemplate(
                         String.class,
                         "DATE_FORMAT({0}, '%Y-%m-%d %H:00:00')",
-                        interactionHistory.createdAt);
+                        path);
             }
             default -> throw new BusinessException(ErrorCode.BAD_REQUEST);
         }

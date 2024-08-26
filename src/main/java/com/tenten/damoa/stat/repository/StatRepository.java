@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StatRepository {
 
-    List<HashtagStatRes> getMetricsCount(HashtagStatCommand command);
+    List<HashtagStatRes> getMetricsCountForPeriod(HashtagStatCommand command);
+
+    List<HashtagStatRes> getPostCountForPeriod(HashtagStatCommand command);
 }
