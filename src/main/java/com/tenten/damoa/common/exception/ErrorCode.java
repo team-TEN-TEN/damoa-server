@@ -28,8 +28,15 @@ public enum ErrorCode {
     PERIOD_DATE_LIMIT_EXCEED_EXCEPTION(HttpStatus.BAD_REQUEST, String.format("날짜단위 조회 기간의 제한범위를 초과했습니다. (%d일)", MAX_DATE_BASED_DATE)),
 
     /**
-     * 401 - Unauthorized
+     * 404 - Not Found
      */
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),
+    CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "발급된 인증 코드가 존재하지 않습니다."),
+
+    /**
+     * 401 Unauthorized
+     */
+    UNAUTHORIZED_ACCESS(HttpStatus.UNAUTHORIZED, "인증번호가 일치하지 않습니다"),
     ACCOUNT_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "존재하지 않는 계정입니다."),
     PASSWORD_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "비밀번호를 잘못 입력했습니다."),
     LOGIN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "로그인을 먼저 해주세요."),
@@ -44,6 +51,7 @@ public enum ErrorCode {
      * 409 - Conflict
      */
     ACCOUNT_CONFLICT(HttpStatus.CONFLICT, "이미 사용중인 계정입니다."),
+
 
     /**
      * 500 - Internal Server Error

@@ -41,6 +41,11 @@ public class Member {
     @Column(nullable = false)
     private LocalDateTime joinedAt;
 
+
+    public void updateRole(MemberRole newRole) {
+        this.role = newRole;
+    }
+
     @Builder
     public Member(
         String account, String email, String password, MemberRole role, LocalDateTime joinedAt
@@ -56,5 +61,6 @@ public class Member {
         if (role == MemberRole.PRE_MEMBER) {
             throw new BusinessException(PRE_MEMBER_FORBIDDEN);
         }
+
     }
 }
