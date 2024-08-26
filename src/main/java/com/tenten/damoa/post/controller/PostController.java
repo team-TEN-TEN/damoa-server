@@ -2,6 +2,8 @@ package com.tenten.damoa.post.controller;
 
 import com.tenten.damoa.post.dto.PostQueryRes;
 import com.tenten.damoa.post.service.PostQueryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,8 @@ public class PostController {
     private final PostQueryService postQueryService;
 
     @GetMapping("/posts")
+    @Tag(name = "post", description = "게시글 API")
+    @Operation(summary = "게시물 목록 조회 API", description = "쿼리 파라미터에 따라 조건에 맞는 게시물을 반환합니다.")
     public Page<PostQueryRes> getPosts(@RequestParam(required = false) String tag,
                                        @RequestParam(required = false) String type,
                                        @RequestParam(name = "order-by", required = false, defaultValue = "createdAt") String order_by,
