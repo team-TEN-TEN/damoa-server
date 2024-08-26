@@ -21,7 +21,7 @@ public class VerificationController {
     @PostMapping("/members/verify")
     public ResponseEntity<String> verifyMember(@RequestBody VerificationReq req) {
          verificationService.memberVerification(req);
-         return ResponseEntity.ok("가입가입되었습니다");
+         return ResponseEntity.ok("가입되었습니다");
     }
 
 }
