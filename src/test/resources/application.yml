@@ -2,14 +2,13 @@ spring:
   config:
     import: application-secret.properties
   datasource:
-    url: jdbc:h2:mem:testdb;MODE=MYSQL
+    url: jdbc:h2:mem:test;MODE=MYSQL
     username: sa
     password:
     driver-class-name: org.h2.Driver
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-  sql:
-    init:
-      mode: always
+
+jwt:
+  secret: ${JWT_SECRET}
+  time:
+    access: ${JWT_ACCESS}
+    refresh: ${JWT_REFRESH}
