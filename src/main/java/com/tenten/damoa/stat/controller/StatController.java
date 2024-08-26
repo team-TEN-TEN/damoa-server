@@ -1,8 +1,5 @@
 package com.tenten.damoa.stat.controller;
 
-import static com.tenten.damoa.stat.domain.Period.MAX_DATE_BASED_DATE;
-import static com.tenten.damoa.stat.domain.Period.MAX_DATE_BASED_HOUR;
-
 import com.tenten.damoa.common.exception.ErrorResponse;
 import com.tenten.damoa.stat.controller.dto.HashtagStatRes;
 import com.tenten.damoa.stat.service.HashtagStatQueryService;
