@@ -41,6 +41,10 @@ public class Post extends BaseEntity {
     @OneToMany(mappedBy = "post")
     private List<Hashtag> hashtags = new ArrayList<>();
 
+    public void incrementLikeCount() {
+        this.likeCount++;
+    }
+
     public void increaseViewCount() {
         this.viewCount++;
     }
