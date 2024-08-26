@@ -12,11 +12,39 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.tenten.damoa.common.exception.BusinessException;
+import com.tenten.damoa.common.exception.ErrorCode;
+import com.tenten.damoa.interaction.domain.InteractionCategory;
+import com.tenten.damoa.interaction.domain.InteractionHistory;
+import com.tenten.damoa.interaction.repository.InteractionHistoryRepository;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
 public class PostQueryService {
     private final PostRepository postRepository;
+    private final InteractionHistoryRepository interactionHistoryRepository;
+
+    @Transactional
+    public Post getPostDetail(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new BusinessException(ErrorCode.BAD_REQUEST));
+
+        post.increaseViewCount();
+        postRepository.save(post);
+
+        //builder 패턴을 이용하여 객체(생성자) 생성
+        InteractionHistory interactionHistory = InteractionHistory.builder()
+                .category(InteractionCategory.VIEW)
+                .createdAt(LocalDateTime.now())
+                .post(post)
+                .build();
+
+
+        interactionHistoryRepository.save(interactionHistory);
+        return post;
+    }
 
     @Transactional
     public Page<PostQueryRes> getPosts(String tag, String type, String orderBy, String order, String searchBy, String search, int pageSize, int page) {
@@ -34,13 +62,11 @@ public class PostQueryService {
             spec = spec.and(PostSpecification.findByType(type));
         }
         if (search != null && !search.isBlank()) {
-            if(searchBy.equals("title")) {
+            if (searchBy.equals("title")) {
                 spec = spec.and(PostSpecification.findByTitle(search));
-            }
-            else if (searchBy.equals("content")) {
+            } else if (searchBy.equals("content")) {
                 spec = spec.and(PostSpecification.findByContent(search));
-            }
-            else {
+            } else {
                 spec = spec.and(PostSpecification.findByTitleOrContent(search));
             }
         }
