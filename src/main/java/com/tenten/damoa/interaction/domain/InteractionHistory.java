@@ -13,10 +13,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
@@ -39,7 +41,15 @@ public class InteractionHistory {
     private Post post;
 
     @Builder
-    public InteractionHistory(InteractionCategory category, LocalDateTime createdAt, Post post) {
+    private InteractionHistory(Long id, InteractionCategory category, LocalDateTime createdAt, Post post) {
+        this.id = id;
+        this.category = category;
+        this.createdAt = createdAt;
+        this.post = post;
+    }
+
+    @Builder
+    private InteractionHistory(InteractionCategory category, LocalDateTime createdAt, Post post) {
         this.category = category;
         this.createdAt = createdAt;
         this.post = post;

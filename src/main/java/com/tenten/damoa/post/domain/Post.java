@@ -11,6 +11,12 @@ import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import com.tenten.damoa.hashtag.domain.Hashtag;
+import jakarta.persistence.*;
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -42,8 +48,18 @@ public class Post extends BaseEntity {
     @Column(nullable = false)
     private int shareCount;
 
+    @OneToMany(mappedBy = "post")
+    private List<Hashtag> hashtags = new ArrayList<>();
+
+    public void incrementLikeCount() {
+        this.likeCount++;
+    }
+
+    public void increaseViewCount() {
+        this.viewCount++;
+    }
+
     public void increaseShareCount() {
         this.shareCount++;
     }
-
 }
