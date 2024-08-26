@@ -13,13 +13,13 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
-public class PostDetailService {
+public class PostDetailQueryService {
 
     private final PostRepository postRepository;
 
     private final InteractionHistoryRepository interactionHistoryRepository;
 
-    public PostDetailService(PostRepository postRepository, InteractionHistoryRepository interactionHistoryRepository) {
+    public PostDetailQueryService(PostRepository postRepository, InteractionHistoryRepository interactionHistoryRepository) {
         this.postRepository = postRepository;
         this.interactionHistoryRepository = interactionHistoryRepository;
     }
