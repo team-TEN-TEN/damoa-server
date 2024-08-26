@@ -20,7 +20,7 @@ public enum ErrorCode {
     /**
      * 404 - Not Found
      */
-    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자 정보를 찾을 수 없습니다."),
     CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "발급된 인증 코드가 존재하지 않습니다."),
 
     /**

@@ -25,7 +25,7 @@ public class VerificationService {
     public void memberVerification(VerificationReq req) {
         String memberAccount = req.getAccount();
         Member member = memberRepository.findByAccount(memberAccount)
-            .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
+            .orElseThrow(() -> new BusinessException(ErrorCode.MEMBER_NOT_FOUND));
 
         VerificationCode verificationCode = verificationCodeRepository.findByMember(member)
             .orElseThrow(() -> new BusinessException(ErrorCode.CODE_NOT_FOUND));
