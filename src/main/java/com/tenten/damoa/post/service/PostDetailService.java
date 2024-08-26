@@ -29,7 +29,6 @@ public class PostDetailService {
                 .orElseThrow(()-> new BusinessException(ErrorCode.BAD_REQUEST));
 
         post.increaseViewCount();
-        post.setUpdatedAt(LocalDateTime.now());
         postRepository.save(post);
 
         InteractionHistory interactionHistory = new InteractionHistory();
