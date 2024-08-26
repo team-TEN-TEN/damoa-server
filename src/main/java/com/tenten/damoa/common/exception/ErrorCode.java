@@ -27,6 +27,21 @@ public enum ErrorCode {
      * 401 Unauthorized
      */
     UNAUTHORIZED_ACCESS(HttpStatus.UNAUTHORIZED, "인증번호가 일치하지 않습니다"),
+    ACCOUNT_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "존재하지 않는 계정입니다."),
+    PASSWORD_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "비밀번호를 잘못 입력했습니다."),
+    LOGIN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "로그인을 먼저 해주세요."),
+    INVALID_TOKEN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
+
+    /**
+     * 403 - Forbidden
+     */
+    PRE_MEMBER_FORBIDDEN(HttpStatus.FORBIDDEN, "서비스 회원이 아닙니다. 이메일 인증을 먼저 해주세요."),
+
+    /**
+     * 409 - Conflict
+     */
+    ACCOUNT_CONFLICT(HttpStatus.CONFLICT, "이미 사용중인 계정입니다."),
+
 
     /**
      * 500 - Internal Server Error

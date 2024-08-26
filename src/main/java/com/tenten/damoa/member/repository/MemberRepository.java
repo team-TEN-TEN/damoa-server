@@ -6,5 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    Optional<Member> findByAccount(String memberAcoount);
+
+    Boolean existsByAccount(String account);
+
+    Optional<Member> findByAccount(String account);
+
 }
