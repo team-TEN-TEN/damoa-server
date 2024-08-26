@@ -44,13 +44,8 @@ public class PostQueryService {
                 spec = spec.and(PostSpecification.findByTitleOrContent(search));
             }
         }
-
         Page<Post> postsPages = postRepository.findAll(spec, paging);
-
-        Page<PostQueryRes> getPostsRes = postsPages.map(
-                postPage -> new PostQueryRes(postPage)
-        );
-
-        return getPostsRes;
+        
+        return postsPages.map(PostQueryRes::new);
     }
 }
