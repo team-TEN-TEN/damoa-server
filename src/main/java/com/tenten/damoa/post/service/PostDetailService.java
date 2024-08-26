@@ -31,10 +31,14 @@ public class PostDetailService {
         post.increaseViewCount();
         postRepository.save(post);
 
-        InteractionHistory interactionHistory = new InteractionHistory();
-        interactionHistory.setCategory(InteractionCategory.VIEW);
-        interactionHistory.setCreatedAt(LocalDateTime.now());
-        interactionHistory.setPost(post);
+
+        InteractionHistory interactionHistory = new InteractionHistory(
+                InteractionCategory.VIEW,
+                LocalDateTime.now(),
+                post
+        );
+
+
         interactionHistoryRepository.save(interactionHistory);
         return post;
     }

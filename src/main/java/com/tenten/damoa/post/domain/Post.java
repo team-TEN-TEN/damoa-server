@@ -46,4 +46,5 @@ public class Post extends BaseEntity {
         this.viewCount++;
     }
 
+
 }
