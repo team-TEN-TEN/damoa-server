@@ -44,8 +44,8 @@ public class PostShareService {
         //RestClient로 외부 API 호출하기 위한 RestClient 생성
         RestClient restClient = RestClient.create();
 
-        //RestClient로 외부 API 호출(GET 요청)
-        String result = restClient.get()
+        //RestClient로 외부 API 호출(POST 요청)
+        String result = restClient.post()
                 .uri(externalApiUrl)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
