@@ -18,8 +18,8 @@ public class PostController {
         this.postShareService = postShareService;
     }
 
-    @PatchMapping("/{id}/share")
-    public ResponseEntity<String> sharePost(@PathVariable("id") Long id ) {
+    @PatchMapping("/{postId}/share")
+    public ResponseEntity<String> sharePost(@PathVariable("postId") Long id ) {
         try {
             postShareService.sharePost(id);
             return ResponseEntity.ok().build();//게시물 공유가 잘 되었다면 200.
