@@ -18,7 +18,7 @@ public class PostController {
     @GetMapping("/posts")
     public Page<PostQueryRes> getPosts(@RequestParam(required = false) String tag,
                                        @RequestParam(required = false) String type,
-                                       @RequestParam(name = "order-by", required = false, defaultValue = "created_at") String order_by,
+                                       @RequestParam(name = "order-by", required = false, defaultValue = "createdAt") String order_by,
                                        @RequestParam(required = false, defaultValue = "desc") String order,
                                        @RequestParam(name = "search-by", required = false, defaultValue = "title,content") String search_by,
                                        @RequestParam(required = false) String search,
