@@ -28,10 +28,6 @@ public class PostQueryRes {
 
         // content 20자 제한
         String content = post.getContent();
-        if (content.length() > 20) {
-            this.content = content.substring(0, 20);
-        } else {
-            this.content = content;
-        }
+        this.content = content.length() > 20 ? content.substring(0, 20) : content;
     }
 }
