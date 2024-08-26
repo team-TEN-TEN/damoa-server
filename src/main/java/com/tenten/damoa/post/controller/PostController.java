@@ -32,8 +32,8 @@ public class PostController {
 
     @GetMapping("/posts/{postId}/detail")
     @Operation(summary = "게시물 상세 조회", description = "게시물 id를 통해 상세 조회하는 API")
-    public ResponseEntity<Post> getPostDetail(@PathVariable("postId") Long id) {
-        Post postDetail = postQueryService.getPostDetail(id);
+    public ResponseEntity<PostQueryRes> getPostDetail(@PathVariable("postId") Long id) {
+        PostQueryRes postDetail = postQueryService.getPostDetail(id);
 
         return ResponseEntity.ok(postDetail);
     }

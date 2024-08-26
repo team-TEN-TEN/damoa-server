@@ -27,12 +27,14 @@ public class PostQueryService {
     private final InteractionHistoryRepository interactionHistoryRepository;
 
     @Transactional
-    public Post getPostDetail(Long id) {
+    public PostQueryRes getPostDetail(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.BAD_REQUEST));
 
         post.increaseViewCount();
         postRepository.save(post);
+
+        PostQueryRes res= new PostQueryRes(post);
 
         //builder 패턴을 이용하여 객체(생성자) 생성
         InteractionHistory interactionHistory = InteractionHistory.builder()
@@ -43,7 +45,7 @@ public class PostQueryService {
 
 
         interactionHistoryRepository.save(interactionHistory);
-        return post;
+        return res;
     }
 
     @Transactional
