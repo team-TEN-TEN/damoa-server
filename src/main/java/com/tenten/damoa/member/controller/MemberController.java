@@ -3,8 +3,11 @@ package com.tenten.damoa.member.controller;
 import static org.springframework.http.HttpStatus.CREATED;
 
 import com.tenten.damoa.common.exception.ErrorResponse;
+import com.tenten.damoa.member.controller.request.LoginMemberReq;
 import com.tenten.damoa.member.controller.request.RegisterMemberReq;
+import com.tenten.damoa.member.controller.response.LoginMemberRes;
 import com.tenten.damoa.member.controller.response.RegisterMemberRes;
+import com.tenten.damoa.member.service.MemberLoginService;
 import com.tenten.damoa.member.service.MemberRegisterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -29,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
     private final MemberRegisterService memberRegisterService;
+    private final MemberLoginService memberLoginService;
 
     @PostMapping("/register")
     @Operation(summary = "사용자 회원가입")
@@ -45,5 +49,25 @@ public class MemberController {
     ) {
         RegisterMemberRes response = memberRegisterService.execute(request);
         return ResponseEntity.status(CREATED).body(response);
+    }
+
+    @PostMapping("/login")
+    @Operation(summary = "사용자 로그인")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "사용자 로그인 성공"),
+        @ApiResponse(
+            responseCode = "401",
+            description = "1. 존재하지 않는 계정입니다.\n2. 비밀번호를 잘못 입력했습니다.",
+            content = {@Content(schema = @Schema(implementation = ErrorResponse.class))}
+        ),
+        @ApiResponse(
+            responseCode = "403",
+            description = "서비스 회원이 아닙니다. 이메일 인증을 먼저 해주세요.",
+            content = {@Content(schema = @Schema(implementation = ErrorResponse.class))}
+        )
+    })
+    public ResponseEntity<LoginMemberRes> login(@RequestBody @Valid LoginMemberReq request) {
+        LoginMemberRes response = memberLoginService.execute(request);
+        return ResponseEntity.ok(response);
     }
 }

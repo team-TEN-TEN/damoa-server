@@ -1,5 +1,8 @@
 package com.tenten.damoa.member.domain;
 
+import static com.tenten.damoa.common.exception.ErrorCode.PRE_MEMBER_FORBIDDEN;
+
+import com.tenten.damoa.common.exception.BusinessException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -47,5 +50,11 @@ public class Member {
         this.password = password;
         this.role = role;
         this.joinedAt = joinedAt;
+    }
+
+    public void verifyMemberRole() {
+        if (role == MemberRole.PRE_MEMBER) {
+            throw new BusinessException(PRE_MEMBER_FORBIDDEN);
+        }
     }
 }
