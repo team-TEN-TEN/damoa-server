@@ -7,10 +7,8 @@ import com.tenten.damoa.interaction.domain.InteractionHistory;
 import com.tenten.damoa.interaction.repository.InteractionHistoryRepository;
 import com.tenten.damoa.post.domain.Post;
 import com.tenten.damoa.post.domain.SnsType;
-import com.tenten.damoa.post.dto.PostLikeRes;
 import com.tenten.damoa.post.repository.PostRepository;
 import java.time.LocalDateTime;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -31,31 +29,25 @@ public class PostService {
 
 
     @Transactional
-    public PostLikeRes postLike(Long id) {
-        Post post = postRepository.findById(id)
+    public void postLike(Long postId) {
+        Post post = postRepository.findById(postId)
             .orElseThrow(() -> new BusinessException(ErrorCode.POST_NOT_FOUND));
 
         String contentId = post.getContentId();
         SnsType type = post.getType();
 
         String apiEndpoint = getApiEndpoint(type, contentId);
+
         if (apiEndpoint == null) {
             throw new BusinessException(ErrorCode.TYPE_NOT_FOUND);
         }
 
         try {
-            ResponseEntity<String> response = restTemplate.postForEntity(apiEndpoint, null,
+             restTemplate.postForEntity(apiEndpoint, null,
                 String.class);
-            if (response.getStatusCode().is2xxSuccessful()) {
-                handleLikeSuccess(post);
-                return new PostLikeRes(true, "좋아요 처리되었습니다.");
-            }else {
-                handleLikeSuccess(post);
-                return new PostLikeRes(true, "좋아요 처리되었습니다.");
-            }
+            handleLikeSuccess(post);
         } catch (Exception e) {
             handleLikeSuccess(post);
-            return new PostLikeRes(true, "좋아요 처리되었습니다.");
         }
     }
 
@@ -71,10 +63,7 @@ public class PostService {
 
     private String getApiEndpoint(SnsType type, String contentId) {
         return switch (type) {
-            case FACEBOOK -> "https://www.facebook.com/likes/" + contentId;
-            case TWITTER -> "https://www.twitter.com/likes/" + contentId;
-            case INSTAGRAM -> "https://www.instagram.com/likes/" + contentId;
-            case THREADS -> "https://www.threads.net/likes/" + contentId;
+            case FACEBOOK, TWITTER, INSTAGRAM, THREADS -> type.getUrl(contentId);
             default -> null;
         };
     }
