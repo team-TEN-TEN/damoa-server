@@ -18,8 +18,8 @@ public class PostController {
         this.postDetailQueryService = postDetailQueryService;
     }
 
-    @GetMapping("/posts/{id}/detail")
-    public ResponseEntity<Post> getPostDetail(@PathVariable("id") Long id) {
+    @GetMapping("/posts/{postId}/detail")
+    public ResponseEntity<Post> getPostDetail(@PathVariable("postId") Long id) {
         Post postDetail = postDetailQueryService.getPostDetail(id);
         return ResponseEntity.ok(postDetail);
     }
