@@ -26,10 +26,10 @@ public class PostController {
                                        @RequestParam(required = false, defaultValue = "desc") String order,
                                        @RequestParam(name = "search-by", required = false, defaultValue = "title,content") String searchBy,
                                        @RequestParam(required = false) String search,
-                                       @RequestParam(name = "page-count", required = false, defaultValue = "10") int pageCount,
+                                       @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize,
                                        @RequestParam(required = false, defaultValue = "0") int page) {
 
-        return postQueryService.getPosts(tag, type, orderBy, order, searchBy, search, pageCount, page);
+        return postQueryService.getPosts(tag, type, orderBy, order, searchBy, search, pageSize, page);
     }
 
 }
