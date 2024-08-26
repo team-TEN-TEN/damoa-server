@@ -11,12 +11,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class PostQueryService {
     private final PostRepository postRepository;
 
+    @Transactional
     public Page<PostQueryRes> getPosts(String tag, String type, String order_by, String order, String search_by, String search, int page_count, int page) {
 
         Sort.Direction direction = "asc".equalsIgnoreCase(order) ? Sort.Direction.ASC : Sort.Direction.DESC;
