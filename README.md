@@ -479,7 +479,6 @@ Content-Type: application/json
 | **2024/08/21** | **데일리 스크럼** | [프로젝트 초기 세팅 및 요구사항 명세](https://www.notion.so/sebel/fff33e3d6c1e80548e26d315a8b58b33?pvs=4) |
 | **2024/08/23** | **데일리 스크럼** | [ERD 작성, 명세서 공유](https://www.notion.so/sebel/ERD-698074ffa75e4d7697d8fe98bc10e32e?pvs=4) |
 | **2024/08/26** | **데일리 스크럼** | [과제1 최종 점검](https://www.notion.so/sebel/1-db40193fa362444b8b7e34a69a59beed?pvs=4) |
----
 
 ## 구현과정
 ### 
