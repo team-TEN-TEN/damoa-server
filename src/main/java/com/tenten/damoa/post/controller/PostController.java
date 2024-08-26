@@ -20,13 +20,7 @@ public class PostController {
 
     @PatchMapping("/{postId}/share")
     public ResponseEntity<String> sharePost(@PathVariable("postId") Long id ) {
-        try {
-            postShareService.sharePost(id);
-            return ResponseEntity.ok().build();//게시물 공유가 잘 되었다면 200.
-        } catch (BusinessException e) {
-            throw e;
-        }catch (Exception e) {
-            throw new BusinessException(ErrorCode.INTERNAL_SERVER_ERROR,e);
-        }
+        postShareService.sharePost(id);
+        return ResponseEntity.ok().build();
     }
 }
