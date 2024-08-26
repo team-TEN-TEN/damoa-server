@@ -31,6 +31,11 @@ public enum ErrorCode {
     PRE_MEMBER_FORBIDDEN(HttpStatus.FORBIDDEN, "서비스 회원이 아닙니다. 이메일 인증을 먼저 해주세요."),
 
     /**
+     * 409 - Conflict
+     */
+    ACCOUNT_CONFLICT(HttpStatus.CONFLICT, "이미 사용중인 계정입니다."),
+
+    /**
      * 500 - Internal Server Error
      */
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 에러가 발생했습니다.")
