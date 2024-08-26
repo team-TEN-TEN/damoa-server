@@ -17,7 +17,7 @@ import lombok.*;
 
 @Entity
 @Getter
-@Setter
+@NoArgsConstructor
 public class InteractionHistory {
 
     @Id
