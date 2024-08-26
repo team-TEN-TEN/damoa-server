@@ -19,10 +19,10 @@ public class PostQueryService {
     private final PostRepository postRepository;
 
     @Transactional
-    public Page<PostQueryRes> getPosts(String tag, String type, String order_by, String order, String search_by, String search, int page_count, int page) {
+    public Page<PostQueryRes> getPosts(String tag, String type, String orderBy, String order, String searchBy, String search, int pageCount, int page) {
 
         Sort.Direction direction = "asc".equalsIgnoreCase(order) ? Sort.Direction.ASC : Sort.Direction.DESC;
-        Pageable paging = PageRequest.of(page, page_count, Sort.by(direction, order_by));
+        Pageable paging = PageRequest.of(page, pageCount, Sort.by(direction, orderBy));
         Specification<Post> spec = (root, query, criteriaBuilder) -> null;
 
         if (tag != null && !tag.isBlank()) {
@@ -34,10 +34,10 @@ public class PostQueryService {
             spec = spec.and(PostSpecification.findByType(type));
         }
         if (search != null && !search.isBlank()) {
-            if(search_by.equals("title")) {
+            if(searchBy.equals("title")) {
                 spec = spec.and(PostSpecification.findByTitle(search));
             }
-            else if (search_by.equals("content")) {
+            else if (searchBy.equals("content")) {
                 spec = spec.and(PostSpecification.findByContent(search));
             }
             else {

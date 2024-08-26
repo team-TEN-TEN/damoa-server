@@ -22,14 +22,14 @@ public class PostController {
     @Operation(summary = "게시물 목록 조회 API", description = "쿼리 파라미터에 따라 조건에 맞는 게시물을 반환합니다.")
     public Page<PostQueryRes> getPosts(@RequestParam(required = false) String tag,
                                        @RequestParam(required = false) String type,
-                                       @RequestParam(name = "order-by", required = false, defaultValue = "createdAt") String order_by,
+                                       @RequestParam(name = "order-by", required = false, defaultValue = "createdAt") String orderBy,
                                        @RequestParam(required = false, defaultValue = "desc") String order,
-                                       @RequestParam(name = "search-by", required = false, defaultValue = "title,content") String search_by,
+                                       @RequestParam(name = "search-by", required = false, defaultValue = "title,content") String searchBy,
                                        @RequestParam(required = false) String search,
-                                       @RequestParam(name = "page-count", required = false, defaultValue = "10") int page_count,
+                                       @RequestParam(name = "page-count", required = false, defaultValue = "10") int pageCount,
                                        @RequestParam(required = false, defaultValue = "0") int page) {
 
-        return postQueryService.getPosts(tag, type, order_by, order, search_by, search, page_count, page);
+        return postQueryService.getPosts(tag, type, orderBy, order, searchBy, search, pageCount, page);
     }
 
 }
