@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
+
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,4 +36,11 @@ public class InteractionHistory {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @Builder
+    public InteractionHistory(InteractionCategory category, LocalDateTime createdAt, Post post) {
+        this.category = category;
+        this.createdAt = createdAt;
+        this.post = post;
+    }
 }

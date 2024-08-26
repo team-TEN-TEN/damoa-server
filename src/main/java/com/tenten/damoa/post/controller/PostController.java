@@ -3,10 +3,12 @@ package com.tenten.damoa.post.controller;
 import com.tenten.damoa.common.exception.BusinessException;
 import com.tenten.damoa.common.exception.ErrorCode;
 import com.tenten.damoa.post.service.PostShareService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "posts", description = "게시물 공유 API")
 @RestController
 @RequestMapping("/api/v1")
 public class PostController {

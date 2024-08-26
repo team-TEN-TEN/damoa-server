@@ -8,12 +8,12 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
 public class Post extends BaseEntity {
 
     @Id
@@ -45,4 +45,5 @@ public class Post extends BaseEntity {
     public void increaseShareCount() {
         this.shareCount++;
     }
+
 }
