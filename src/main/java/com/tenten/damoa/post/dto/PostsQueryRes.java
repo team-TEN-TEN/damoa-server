@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class PostQueryRes {
+public class PostsQueryRes {
     private Long id;
     private String contentId;
     private SnsType type;
@@ -17,7 +17,7 @@ public class PostQueryRes {
     private int likeCount;
     private int shareCount;
 
-    public PostQueryRes(Post post) {
+    public PostsQueryRes(Post post) {
         this.id = post.getId();
         this.contentId = post.getContentId();
         this.type = post.getType();
@@ -25,6 +25,9 @@ public class PostQueryRes {
         this.viewCount = post.getViewCount();
         this.likeCount = post.getLikeCount();
         this.shareCount = post.getShareCount();
-        this.content = post.getContent();
+
+        // content 20자 제한
+        String content = post.getContent();
+        this.content = content.length() > 20 ? content.substring(0, 20) : content;
     }
 }
