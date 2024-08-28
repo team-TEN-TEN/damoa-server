@@ -42,7 +42,6 @@ JaCoCo를 활용해 코드 커버리지를 측정했습니다.
 ```
 
 > `build/jacoco/index.html/index.html`에 커버리지 보고서가 생성됩니다.
-> ![image](https://github.com/user-attachments/assets/a6739cb1-9081-4761-85ae-e97e1b8bb618)
 
 ## API Reference
 
