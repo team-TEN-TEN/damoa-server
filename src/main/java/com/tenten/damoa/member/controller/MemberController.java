@@ -1,6 +1,6 @@
 package com.tenten.damoa.member.controller;
 
-import static com.tenten.damoa.common.config.OpenApiConfig.ACCESS_TOKEN_KEY;
+
 import static org.springframework.http.HttpStatus.CREATED;
 
 import com.tenten.damoa.common.config.auth.Auth;
@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -54,7 +53,6 @@ public class MemberController {
         return ResponseEntity.status(CREATED).body(response);
     }
 
-    @Auth
     @PostMapping("/login")
     @Operation(summary = "사용자 로그인")
     @ApiResponses(value = {
