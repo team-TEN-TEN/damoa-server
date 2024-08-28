@@ -96,8 +96,8 @@ jacocoTestReport {
 			)
 		}
 
-		xml.destination file("${buildDir}/jacoco/index.xml")   // `build` 디렉토리에 리포트 파일 생성
-		html.destination file("${buildDir}/jacoco/index.html")
+		xml.destination file("${layout.buildDirectory.get().asFile}/jacoco/index.xml")   // `build` 디렉토리에 리포트 파일 생성
+		html.destination file("${layout.buildDirectory.get().asFile}/jacoco/index.html")
 	}
 }
 /** Jacoco end **/
