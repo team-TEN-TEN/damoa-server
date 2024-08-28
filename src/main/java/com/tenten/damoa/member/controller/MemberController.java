@@ -56,7 +56,7 @@ public class MemberController {
 
     @Auth
     @PostMapping("/login")
-    @Operation(summary = "사용자 로그인", security = {@SecurityRequirement(name = ACCESS_TOKEN_KEY)})
+    @Operation(summary = "사용자 로그인")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "사용자 로그인 성공"),
         @ApiResponse(
