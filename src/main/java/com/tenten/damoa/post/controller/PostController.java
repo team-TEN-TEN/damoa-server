@@ -40,13 +40,13 @@ public class PostController {
     @GetMapping("/posts")
     @Operation(summary = "게시물 목록 조회", description = "쿼리 파라미터에 따라 조건에 맞는 게시물을 반환합니다.")
     public ResponseEntity<Page<PostsQueryRes>> getPosts(@RequestParam(required = false) String tag,
-                                        @RequestParam(required = false) String type,
-                                        @RequestParam(name = "order-by", required = false, defaultValue = "createdAt") String orderBy,
-                                        @RequestParam(required = false, defaultValue = "desc") String order,
-                                        @RequestParam(name = "search-by", required = false, defaultValue = "title, content") String searchBy,
-                                        @RequestParam(required = false) String search,
-                                        @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize,
-                                        @RequestParam(required = false, defaultValue = "0") int page) {
+        @RequestParam(required = false) String type,
+        @RequestParam(name = "order-by", required = false, defaultValue = "createdAt") String orderBy,
+        @RequestParam(required = false, defaultValue = "desc") String order,
+        @RequestParam(name = "search-by", required = false, defaultValue = "title, content") String searchBy,
+        @RequestParam(required = false) String search,
+        @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize,
+        @RequestParam(required = false, defaultValue = "0") int page) {
 
         Page<PostsQueryRes> postQueryRes = postQueryService.getPosts(tag, type, orderBy, order, searchBy, search, pageSize, page);
         return ResponseEntity.ok(postQueryRes);
