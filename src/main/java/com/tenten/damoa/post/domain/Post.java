@@ -1,6 +1,9 @@
 package com.tenten.damoa.post.domain;
 
 import com.tenten.damoa.common.model.BaseEntity;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import com.tenten.damoa.hashtag.domain.Hashtag;
 import jakarta.persistence.*;
 import lombok.Getter;

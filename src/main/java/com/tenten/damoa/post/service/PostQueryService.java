@@ -2,6 +2,7 @@ package com.tenten.damoa.post.service;
 
 import com.tenten.damoa.post.domain.Post;
 import com.tenten.damoa.post.dto.PostQueryRes;
+import com.tenten.damoa.post.dto.PostsQueryRes;
 import com.tenten.damoa.post.repository.PostRepository;
 import com.tenten.damoa.post.specification.PostSpecification;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +28,14 @@ public class PostQueryService {
     private final InteractionHistoryRepository interactionHistoryRepository;
 
     @Transactional
-    public Post getPostDetail(Long id) {
+    public PostQueryRes getPostDetail(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.BAD_REQUEST));
 
         post.increaseViewCount();
         postRepository.save(post);
+
+        PostQueryRes res= new PostQueryRes(post);
 
         //builder 패턴을 이용하여 객체(생성자) 생성
         InteractionHistory interactionHistory = InteractionHistory.builder()
@@ -43,11 +46,11 @@ public class PostQueryService {
 
 
         interactionHistoryRepository.save(interactionHistory);
-        return post;
+        return res;
     }
 
     @Transactional
-    public Page<PostQueryRes> getPosts(String tag, String type, String orderBy, String order, String searchBy, String search, int pageSize, int page) {
+    public Page<PostsQueryRes> getPosts(String tag, String type, String orderBy, String order, String searchBy, String search, int pageSize, int page) {
 
         Sort.Direction direction = "asc".equalsIgnoreCase(order) ? Sort.Direction.ASC : Sort.Direction.DESC;
         Pageable paging = PageRequest.of(page, pageSize, Sort.by(direction, orderBy));
@@ -72,6 +75,6 @@ public class PostQueryService {
         }
         Page<Post> postsPages = postRepository.findAll(spec, paging);
 
-        return postsPages.map(PostQueryRes::new);
+        return postsPages.map(PostsQueryRes::new);
     }
 }

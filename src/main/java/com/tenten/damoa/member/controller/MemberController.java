@@ -1,7 +1,9 @@
 package com.tenten.damoa.member.controller;
 
+
 import static org.springframework.http.HttpStatus.CREATED;
 
+import com.tenten.damoa.common.config.auth.Auth;
 import com.tenten.damoa.common.exception.ErrorResponse;
 import com.tenten.damoa.member.controller.request.LoginMemberReq;
 import com.tenten.damoa.member.controller.request.RegisterMemberReq;

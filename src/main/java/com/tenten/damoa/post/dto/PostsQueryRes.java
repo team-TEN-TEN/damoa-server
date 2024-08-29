@@ -1,17 +1,13 @@
 package com.tenten.damoa.post.dto;
 
-import com.tenten.damoa.hashtag.domain.Hashtag;
 import com.tenten.damoa.post.domain.Post;
 import com.tenten.damoa.post.domain.SnsType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Getter
 @NoArgsConstructor
-public class PostQueryRes {
+public class PostsQueryRes {
     private Long id;
     private String contentId;
     private SnsType type;
@@ -20,9 +16,8 @@ public class PostQueryRes {
     private int viewCount;
     private int likeCount;
     private int shareCount;
-    private List<String> hashtags;
 
-    public PostQueryRes(Post post) {
+    public PostsQueryRes(Post post) {
         this.id = post.getId();
         this.contentId = post.getContentId();
         this.type = post.getType();
@@ -30,9 +25,9 @@ public class PostQueryRes {
         this.viewCount = post.getViewCount();
         this.likeCount = post.getLikeCount();
         this.shareCount = post.getShareCount();
-        this.content = post.getContent();
-        this.hashtags = post.getHashtags().stream()
-                .map(Hashtag::getTag) // 해시태그 이름을 추출한다고 가정
-                .collect(Collectors.toList());
+
+        // content 20자 제한
+        String content = post.getContent();
+        this.content = content.length() > 20 ? content.substring(0, 20) : content;
     }
 }
