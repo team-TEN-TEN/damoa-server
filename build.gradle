@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.2'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'jacoco'
 }
 
 group = 'com.tenten'
@@ -56,6 +57,50 @@ dependencies {
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
 }
+
+jacoco {
+	toolVersion = "0.8.12"
+}
+
+test {
+	finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+	dependsOn test // 테스트 이후에 수행
+
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+
+		// QueryDSL QDomain 제외시키기
+		def QDomains = []
+
+		for (qPattern in '**/QA'..'**/QZ') {
+			QDomains.add(qPattern + '*')
+		}
+		afterEvaluate {
+			classDirectories.setFrom(
+					files(classDirectories.files.collect {
+						fileTree(dir: it, excludes: [
+								"com/tenten/damoa/**/domain/**",
+								"**/*Application*",
+								"**/*Config*",
+								"**/*Req*",
+								"**/*Res*",
+								"**/*Interceptor*",
+								"**/*Exception*",
+								"**/*specification*"
+						] + QDomains)
+					})
+			)
+		}
+
+		xml.destination file("${layout.buildDirectory.get().asFile}/jacoco/index.xml")   // `build` 디렉토리에 리포트 파일 생성
+		html.destination file("${layout.buildDirectory.get().asFile}/jacoco/index.html")
+	}
+}
+/** Jacoco end **/
 
 tasks.named('test') {
 	useJUnitPlatform()
